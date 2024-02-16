@@ -1,36 +1,26 @@
-<form action="" method="post">
-    kategori :
-    <input type="text" name="kategori" id="">
-    <br>
-    <input type="submit" value="simpan" name="simpan">
+<h3>INSERT KATEGORI</h3>
+<div class="form-group">
+    <form action="" method="post">
+        <div class="form-group w-25">
+            <label for="">Nama Kategori</label>
+            <input type="text" name="kategori" require placeholder="isi kategori" class="form-control">
 
+        </div>
 
-</form>
+        <div>
+            <input type="submit" value="simpan" name="simpan" class="btn btn-primary mt-2">
+        </div>
+    </form>
+</div>
 
 <?php 
-
-
-    require_once "../pelanggan/function.php";
-
     if (isset($_POST['simpan'])) {
         $kategori = $_POST['kategori'];
-        // echo $kategori;
-
-        // $kategori = 'buah';
 
         $sql = "INSERT INTO tblkategori VALUES ('','$kategori')";
+        
+        $db->runSQL($sql);
 
-        $result = mysqli_query($koneksi, $sql);
-
-        echo "data sudah disimpan";
-
-        header("location : http://localhost/XI-Semester2/phpsmk/restoran/kategori/select.php");
-
+        header("location:?f=kategori&m=select");
     }
-
-   
-    
-
-    
-
 ?>

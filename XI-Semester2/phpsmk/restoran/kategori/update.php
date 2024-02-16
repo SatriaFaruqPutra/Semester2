@@ -1,45 +1,42 @@
 <?php 
 
-    require_once "../pelanggan/function.php";
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
 
-    // echo $id;
+        $sql = "SELECT * FROM tblkategori WHERE idkategori=$id";
 
-    $sql = "SELECT * FROM tblkategori WHERE idkategori = $id";
-    $result = mysqli_query($koneksi,$sql);
+        $row = $db->getITEM($sql);
 
-    $row=mysqli_fetch_assoc($result);
+        echo $id;
 
-    // $kategori = 'nasi';
-    // $id=21;
-    // $sql = "UPDATE tblkategori SET kategori='$kategori' WHERE idkategori=$id";
-
-    // $result = mysqli_query($koneksi,$sql);
-
-    // echo $sql;
-
-
-
-?>
-
-<form action="" method="post">
-    kategori :
-    <input type="text" name="kategori" value="<?php echo $row['kategori'] ?>">
-    <br>
-    <input type="submit" value="simpan" name="simpan">
-</form>
-
-<?php 
-    if (isset($_GET['simpan'])) {
-        $kategori = $_post['kategori'];
-        echo $kategori;
-
-        $sql = "UPDATE tblkategori SET kategori='$kategori' WHERE idkategori=$id";
-
-        $result = mysqli_query($koneksi,$sql);
-
-        echo $sql;
-
-        header("location:http://localhost/XI-Semester2/phpsmk/restoran/kategori/select.php");
     }
 
 ?>
+
+<h3>INSERT KATEGORI</h3>
+<div class="form-group">
+    <form action="" method="post">
+        <div class="form-group w-25">
+            <label for="">Nama Kategori</label>
+            <input type="text" name="kategori" require value="<?php echo $row['kategori']?>" class="form-control">
+
+        </div>
+
+        <div>
+            <input type="submit" value="simpan" name="simpan" class="btn btn-primary mt-2">
+        </div>
+    </form>
+</div>
+
+<?php 
+    if (isset($_POST['simpan'])) {
+        $kategori = $_POST['kategori'];
+
+        $sql = "UPDATE tblkategori SET kategori='$kategori' WHERE idkategori=$id";
+        
+        $db->runSQL($sql);
+
+        header("location:?f=kategori&m=select");
+    }
+?>
+

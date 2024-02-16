@@ -1,17 +1,14 @@
-update data
-
 <?php 
 
-    require_once "../pelanggan/function.php";
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
 
-    // $id=4;
+            $sql = "DELETE FROM tblkategori WHERE idkategori=$id";
 
-    // $sql = "DELETE FROM tblkategori WHERE idkategori = $id";
+            $db->runSQL($sql);
 
-    // $result = mysqli_query($koneksi, $sql);
+            header("location:?f=kategori&m=select");
 
-    // header("location: http://localhost/XI-Semester2/phpsmk/restoran/kategori/select.php");
-
-    // echo $sql;
+        }
 
 ?>
